@@ -14,10 +14,7 @@
          Simple HTML elements (text formatting, paragraphs, and lists) can be added inside of <![CDATA[ ]]> tag.
          Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-description -->
     <description>
-        <![CDATA[
-        Enter short description for your plugin here.<br>
-        <em>most HTML tags may be used</em>
-    ]]>
+        This is a code generation plugin for MyBatis-Plus, which supports the Dameng database. Other domestic databases have not been included due to the lack of test instances. If anyone needs to add support for other database types, feel free to contact me at cy@cy27.cn.
     </description>
 
     <!-- Product and plugin compatibility requirements.
