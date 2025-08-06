@@ -55,7 +55,7 @@ tasks {
 
   patchPluginXml {
     sinceBuild.set("202")
-    untilBuild.set("251.*")
+    untilBuild.set("252.*")
   }
 
   signPlugin {
@@ -66,5 +66,11 @@ tasks {
 
   publishPlugin {
     token.set(System.getenv("PUBLISH_TOKEN"))
+  }
+
+  runIde  {
+    jvmArgs = listOf(
+            "-javaagent:C:\\Users\\54144\\.jb_crack\\core\\ja-netfilter.jar"
+    )
   }
 }

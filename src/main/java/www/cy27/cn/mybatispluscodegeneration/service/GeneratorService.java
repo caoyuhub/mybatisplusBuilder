@@ -169,6 +169,7 @@ public class GeneratorService {
         strategyConfig.addInclude(tableNameList);
 
         if(ObjectUtil.isNotEmpty(generationParameters.getEntitySuffix())){
+            // 实体类后缀
             strategyConfig.entityBuilder().nameConvert(new INameConvert() {
                 @Override
                 public @NotNull String entityNameConvert(@NotNull TableInfo tableInfo) {
@@ -179,8 +180,19 @@ public class GeneratorService {
                 public @NotNull String propertyNameConvert(@NotNull TableField field) {
                     return new INameConvert.DefaultNameConvert(strategyConfig.build()).propertyNameConvert(field);
                 }
-            }); // 添加后缀
+            });
         }
+
+        //Service 文件名称
+        strategyConfig.serviceBuilder().convertServiceFileName(entityName -> entityName.substring(0,entityName.length()-generationParameters.getEntitySuffix().length())+"Service");
+        //Service Impl  文件名称
+        strategyConfig.serviceBuilder().convertServiceImplFileName(entityName -> entityName.substring(0,entityName.length()-generationParameters.getEntitySuffix().length())+"ServiceImpl");
+        //Mapper JAVA 文件名称
+        strategyConfig.mapperBuilder().convertMapperFileName(entityName -> entityName.substring(0,entityName.length()-generationParameters.getEntitySuffix().length())+"Mapper");
+        //Mapper XML 文件名称
+        strategyConfig.mapperBuilder().convertXmlFileName(entityName -> entityName.substring(0,entityName.length()-generationParameters.getEntitySuffix().length())+"Mapper");
+        // Controller 文件名称
+        strategyConfig.controllerBuilder().convertFileName(entityName -> entityName.substring(0,entityName.length()-generationParameters.getEntitySuffix().length())+"Controller");
 
         AutoGenerator autoGenerator = new AutoGenerator(dataSourceConfig);
         autoGenerator.global(globalConfig.build());

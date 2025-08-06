@@ -17,18 +17,25 @@ import java.util.List;
 public class SettingsUtil {
 
 
+    /**
+     * 获取当前打开窗口中所有的项目信息
+     * @param e
+     * @return
+     */
     public static List<ProjectPathInfo>  getOpenProjectList(AnActionEvent e){
         Project project = e.getProject();
         List<ProjectPathInfo> result = new ArrayList<>();
-        Module @NotNull [] modules = ModuleManager.getInstance(project).getModules();
-        for (Module module : modules) {
-            ModuleRootManager moduleRootManager = ModuleRootManager.getInstance(module);
-            VirtualFile[] contentRoots = moduleRootManager.getContentRoots();
-            for(VirtualFile file:contentRoots){
-                ProjectPathInfo projectPathInfo = new ProjectPathInfo();
-                projectPathInfo.setName(module.getName());
-                projectPathInfo.setPath(file.getPath());
-                result.add(projectPathInfo);
+        Module [] modules = ModuleManager.getInstance(project).getModules();
+        if(modules != null){
+            for (Module module : modules) {
+                ModuleRootManager moduleRootManager = ModuleRootManager.getInstance(module);
+                VirtualFile[] contentRoots = moduleRootManager.getContentRoots();
+                for(VirtualFile file:contentRoots){
+                    ProjectPathInfo projectPathInfo = new ProjectPathInfo();
+                    projectPathInfo.setName(module.getName());
+                    projectPathInfo.setPath(file.getPath());
+                    result.add(projectPathInfo);
+                }
             }
         }
         return result;
