@@ -24,9 +24,9 @@ public class SettingsUtil {
      */
     public static List<ProjectPathInfo>  getOpenProjectList(AnActionEvent e){
         Project project = e.getProject();
-        List<ProjectPathInfo> result = new ArrayList<>();
-        Module [] modules = ModuleManager.getInstance(project).getModules();
-        if(modules != null){
+        if(project != null){
+            List<ProjectPathInfo> result = new ArrayList<>();
+            Module [] modules = ModuleManager.getInstance(project).getModules();
             for (Module module : modules) {
                 ModuleRootManager moduleRootManager = ModuleRootManager.getInstance(module);
                 VirtualFile[] contentRoots = moduleRootManager.getContentRoots();
@@ -37,7 +37,8 @@ public class SettingsUtil {
                     result.add(projectPathInfo);
                 }
             }
+            return result;
         }
-        return result;
+        return new ArrayList<>();
     }
 }
