@@ -16,6 +16,7 @@ import www.cy27.cn.mybatispluscodegeneration.entity.DataSource;
 import www.cy27.cn.mybatispluscodegeneration.entity.GenerationParameters;
 import www.cy27.cn.mybatispluscodegeneration.entity.IdTypeSelect;
 import www.cy27.cn.mybatispluscodegeneration.form.MainForm;
+import www.cy27.cn.mybatispluscodegeneration.generator.MyDefaultQuery;
 import www.cy27.cn.mybatispluscodegeneration.util.ParametersUtil;
 
 import javax.swing.table.TableModel;
@@ -50,10 +51,24 @@ public class GeneratorService {
                 dataSource.getUrl(),
                 dataSource.getUsername(),
                 dataSource.getPassword());
+
+        dataSourceConfigBuilder.schema(dataSource.getSchema());
+        dataSourceConfigBuilder.databaseQueryClass(MyDefaultQuery.class);
+
+        StrategyConfig.Builder strategyConfig = new StrategyConfig.Builder();
+        //跳过视图
+        strategyConfig.enableSkipView();
+        //添加表名，只要字母、数字、下划线、空格，其他名字的表可能会导致出错
+        // 整串校验（必须从头到尾都是合法字符）
+        String regex = "^[A-Za-z0-9_ ]+$";
+        strategyConfig.addInclude(
+                regex
+        );
+
         ConfigBuilder config = new ConfigBuilder(
                 null,
                 dataSourceConfigBuilder.build(),
-                null,
+                strategyConfig.build(),
                 null,
                 null,
                 null);

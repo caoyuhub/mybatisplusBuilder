@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "www.cy27.cn"
-version = "1.0.0"
+version = "1.1.0"
 
 repositories {
   maven {
@@ -38,7 +38,7 @@ dependencies{
 //  mysql驱动
   implementation("mysql:mysql-connector-java:8.0.33")
 //  oracle驱动
-  implementation("com.oracle.database.jdbc:ojdbc11:23.7.0.25.01")
+  implementation("com.oracle.database.jdbc:ojdbc11:23.9.0.25.07")
 //  postgresql驱动
   implementation("org.postgresql:postgresql:42.7.5")
 //  sqlserver驱动

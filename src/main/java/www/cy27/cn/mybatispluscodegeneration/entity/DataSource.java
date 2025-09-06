@@ -10,6 +10,7 @@ public class DataSource {
     String url;
     String username;
     String password;
+    String schema;
 
     public String getId() {
         return id;
@@ -57,6 +58,14 @@ public class DataSource {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getSchema() {
+        return schema;
+    }
+
+    public void setSchema(String schema) {
+        this.schema = schema;
     }
 
     @Override

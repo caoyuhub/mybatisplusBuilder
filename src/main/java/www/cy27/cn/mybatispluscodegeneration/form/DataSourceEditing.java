@@ -26,6 +26,8 @@ public class DataSourceEditing extends JFrame {
     JBTextField usernameText = new JBTextField();
     JBTextField passwordText = new JBTextField();
 
+    JBTextField schemaText = new JBTextField();
+
     JButton test = new JButton("测试连接");
     JButton save = new JButton("保存连接");
 
@@ -44,13 +46,14 @@ public class DataSourceEditing extends JFrame {
             usernameText.setText(dataSource.getUsername());
             passwordText.setText(dataSource.getPassword());
             typeText.setText(dataSource.getType());
+            schemaText.setText(dataSource.getSchema());
         }
 
         // 设置窗口标题
         setTitle("mybatisPlus代码生成器-" + text);
         setIconImage(((ImageIcon) MyBatisIcon.LOGO_22x22).getImage());
         // 设置窗口大小
-        setSize(800, 220);
+        setSize(800, 250);
         // 设置窗口位置居中
         setLocationRelativeTo(null);
         // 设置 BoxLayout 为垂直方向
@@ -62,6 +65,7 @@ public class DataSourceEditing extends JFrame {
 
         addRow("名  称 : ",nameText);
         addRow("U R L : ",urlText);
+        addRow("Schema(目前针对ORACLE有效，默认为用户名): ",schemaText);
         addRow("用户名 : ",usernameText);
         addRow("密  码 : ",passwordText);
         addRow("类型(自动识别)",typeText);
@@ -107,6 +111,7 @@ public class DataSourceEditing extends JFrame {
                         source.setUrl(nowSource.getUrl());
                         source.setUsername(nowSource.getUsername());
                         source.setType(nowSource.getType());
+                        source.setSchema(nowSource.getSchema());
                         DatasourceUtil.updateSource(DatasourceUtil.getAllSource());
                     }
 
@@ -155,6 +160,7 @@ public class DataSourceEditing extends JFrame {
         data.setUrl(urlText.getText());
         data.setUsername(usernameText.getText());
         data.setPassword(passwordText.getText());
+        data.setSchema(schemaText.getText());
         return data;
     }
 }

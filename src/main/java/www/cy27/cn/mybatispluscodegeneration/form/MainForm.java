@@ -402,7 +402,7 @@ public class MainForm extends JFrame {
             tableModel.setDataVector(data,columnNames);
         }catch (Exception e){
             e.printStackTrace();
-            Messages.showErrorDialog(e.getMessage(),"错误");
+            Messages.showErrorDialog(e.toString(),"错误");
         }
     }
 
