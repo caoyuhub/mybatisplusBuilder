@@ -21,7 +21,7 @@ public class DataSourceMaintenance extends JFrame {
 
     // 创建表格模型
     // 准备列名
-    String[] columnNames = {"id","名称", "类型",  "JDBC-URL", "账号", "密码"};
+    String[] columnNames = {"id","名称", "类型",  "JDBC-URL", "账号", "密码", "Schema"};
     DefaultTableModel model = new DefaultTableModel(new Object[][]{}, columnNames);
     JBTable datasourceTable = new JBTable(model);
     JButton addSource = new JButton("添加数据源");
@@ -145,6 +145,7 @@ public class DataSourceMaintenance extends JFrame {
             data[i][3] = allDataSource.get(i).getUrl();
             data[i][4] = allDataSource.get(i).getUsername();
             data[i][5] = allDataSource.get(i).getPassword();
+            data[i][6] = allDataSource.get(i).getSchema();
         }
         model.setDataVector(data,columnNames);
         toFront();

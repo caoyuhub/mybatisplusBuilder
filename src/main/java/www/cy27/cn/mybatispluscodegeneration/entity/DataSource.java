@@ -70,6 +70,9 @@ public class DataSource {
 
     @Override
     public String toString() {
-        return "【"+type.toUpperCase(Locale.ROOT)+"】【"+getName()+"】";
+        if(getSchema() == null){
+            return "【"+type.toUpperCase(Locale.ROOT)+"】【"+getName()+"】";
+        }
+        return "【"+type.toUpperCase(Locale.ROOT)+"】【"+getName()+"】【Schema:"+getSchema()+"】";
     }
 }
