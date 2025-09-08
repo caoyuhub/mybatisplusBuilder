@@ -57,7 +57,7 @@ public class GeneratorService {
 
         StrategyConfig.Builder strategyConfig = new StrategyConfig.Builder();
         //跳过视图
-        strategyConfig.enableSkipView();
+//        strategyConfig.enableSkipView();
         //添加表名，只要字母、数字、下划线、空格，其他名字的表可能会导致出错
         // 整串校验（必须从头到尾都是合法字符）
         String regex = "^[A-Za-z0-9_ ]+$";
@@ -94,11 +94,14 @@ public class GeneratorService {
 
 
 
-        DataSourceConfig dataSourceConfig = new DataSourceConfig.Builder(
+        DataSourceConfig.Builder dataSourceConfig = new DataSourceConfig.Builder(
                 dataSource.getUrl(),
                 dataSource.getUsername(),
                 dataSource.getPassword()
-        ).build();
+        );
+
+        dataSourceConfig.schema(dataSource.getSchema());
+        dataSourceConfig.databaseQueryClass(MyDefaultQuery.class);
 
         GenerationParameters generationParameters = ParametersUtil.getParameters(mainForm);
 
@@ -209,7 +212,7 @@ public class GeneratorService {
         // Controller 文件名称
         strategyConfig.controllerBuilder().convertFileName(entityName -> entityName.substring(0,entityName.length()-generationParameters.getEntitySuffix().length())+"Controller");
 
-        AutoGenerator autoGenerator = new AutoGenerator(dataSourceConfig);
+        AutoGenerator autoGenerator = new AutoGenerator(dataSourceConfig.build());
         autoGenerator.global(globalConfig.build());
         autoGenerator.packageInfo(packageConfig.build());
         autoGenerator.strategy(strategyConfig.build());
