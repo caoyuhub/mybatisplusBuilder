@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "www.cy27.cn"
-version = "1.2.3"
+version = "1.2.4"
 
 repositories {
   maven {
