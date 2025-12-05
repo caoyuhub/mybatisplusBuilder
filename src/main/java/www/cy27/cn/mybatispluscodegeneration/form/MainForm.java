@@ -6,6 +6,8 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.project.ProjectManager;
 import com.intellij.openapi.ui.ComboBox;
 import com.intellij.openapi.ui.Messages;
+import com.intellij.openapi.vfs.LocalFileSystem;
+import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.ui.JBColor;
 import com.intellij.ui.components.JBScrollPane;
 import com.intellij.ui.components.JBTextField;
@@ -252,6 +254,16 @@ public class MainForm extends JFrame {
             try{
                 ParametersUtil.getParameters(this);
                 Messages.showInfoMessage("保存成功","成功");
+
+                //刷新资源管理器
+                // 获取 VirtualFile 对象（同步方式）
+                LocalFileSystem lfs = LocalFileSystem.getInstance();
+                VirtualFile dir = lfs.refreshAndFindFileByPath(outputDir.getText());
+                if (dir != null) {
+                    // 强制刷新该目录及其子项
+                    // 第一个参数：是否递归父目录；第二个参数：是否递归子目录
+                    dir.refresh(false, true);
+                }
             }catch (RuntimeException e2){
                 e2.printStackTrace();
                 Messages.showErrorDialog(e2.getMessage(),"错误");
