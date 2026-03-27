@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "www.cy27.cn"
-version = "1.2.4"
+version = "1.2.4.2"
 
 repositories {
   maven {
@@ -60,7 +60,7 @@ tasks {
 
   patchPluginXml {
     sinceBuild.set("202")
-    untilBuild.set("252.*")
+    untilBuild.set("")
   }
 
   signPlugin {

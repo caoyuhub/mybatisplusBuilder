@@ -41,4 +41,5 @@
             <keyboard-shortcut keymap="$default" first-keystroke="alt m"/>
         </action>
     </actions>
+    “？：》
 </idea-plugin>
